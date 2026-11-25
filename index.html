@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>阮海南 RUAN HAI-NAN | 開南大學資訊管理學系 3年級</title>
+
+  <!-- Load Google Fonts: Archivo Black, Space Grotesk, and Noto Sans TC (500, 700, 900) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans+TC:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ==========================================================================
+       1. CSS VARIABLES ON :ROOT (STRICT NEO-BRUTALISM TOKENS)
+       ========================================================================== */
+    :root {
+      /* Core Colors */
+      --bg-primary: #FFDE59;
+      --text-primary: #111111;
+      --btn-primary: #FF5757;
+      --card-bg: #FFFFFF;
+      --border-color: #111111;
+
+      /* Color Block Accents (Solid, Zero Opacity, Zero Gradients) */
+      --block-cyan: #5CE1E6;
+      --block-lime: #7ED957;
+      --block-inverted-bg: #111111;
+      --block-inverted-text: #FFDE59;
+      --block-white: #FFFFFF;
+
+      /* Typography */
+      --font-heading: 'Archivo Black', 'Noto Sans TC', sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', sans-serif;
+      --font-zh-heavy: 'Noto Sans TC', sans-serif;
+
+      /* Borders & Hard Offset Shadows */
+      --border-width: 3px;
+      --border-rule-width: 4px;
+      --border-solid: var(--border-width) solid var(--border-color);
+      --border-rule: var(--border-rule-width) solid var(--border-color);
+      --shadow-hard: 6px 6px 0px var(--border-color);
+      --shadow-pressed: 2px 2px 0px var(--border-color);
+      --shadow-inverted-hard: 6px 6px 0px var(--bg-primary);
+      --shadow-inverted-pressed: 2px 2px 0px var(--bg-primary);
+
+      /* Layout & Accessibility */
+      --tap-min: 44px;
+      --container-max: 1120px;
+    }
+
+    /* ==========================================================================
+       2. GLOBAL RESET & STRICT ZERO-RADIUS / ZERO-OVERFLOW ENFORCEMENT
+       ========================================================================== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      border-radius: 0 !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1, h2, h3, h4, p, ul, figure {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ==========================================================================
+       3. NEO-BRUTALIST INTERACTIVE PRIMITIVES (CARDS, BUTTONS, INPUTS)
+       ========================================================================== */
+    .nb-card {
+      background-color: var(--card-bg);
+      color: var(--text-primary);
+      border: var(--border-solid);
+      box-shadow: var(--shadow-hard);
+      transition: transform 0.12s steps(2, end), box-shadow 0.12s steps(2, end);
+    }
+
+    .nb-card-interactive:hover,
+    .nb-card-interactive:focus-within {
+      transform: translate(4px, 4px);
+      box-shadow: var(--shadow-pressed);
+    }
+
+    .nb-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: var(--tap-min);
+      min-width: var(--tap-min);
+      padding: 12px 20px;
+      background-color: var(--btn-primary);
+      color: var(--text-primary);
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      border: var(--border-solid);
+      box-shadow: var(--shadow-hard);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.1s steps(2, end), box-shadow 0.1s steps(2, end);
+    }
+
+    .nb-btn:hover,
+    .nb-btn:focus-visible {
+      transform: translate(4px, 4px);
+      box-shadow: var(--shadow-pressed);
+      outline: none;
+    }
+
+    .nb-btn:active {
+      transform: translate(6px, 6px);
+      box-shadow: 0px 0px 0px var(--border-color);
+    }
+
+    .nb-btn-white {
+      background-color: var(--card-bg);
+    }
+
+    .nb-btn-cyan {
+      background-color: var(--block-cyan);
+    }
+
+    .nb-btn-yellow {
+      background-color: var(--bg-primary);
+    }
+
+    .nb-input {
+      width: 100%;
+      min-height: var(--tap-min);
+      padding: 12px 14px;
+      background-color: var(--card-bg);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 16px;
+      border: var(--border-solid);
+      box-shadow: var(--shadow-hard);
+      transition: transform 0.1s steps(2, end), box-shadow 0.1s steps(2, end);
+    }
+
+    .nb-input::placeholder {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .nb-input:hover,
+    .nb-input:focus {
+      transform: translate(4px, 4px);
+      box-shadow: var(--shadow-pressed);
+      outline: none;
+    }
+
+    textarea.nb-input {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* ==========================================================================
+       4. LAYOUT SHELL & THICK SECTION RULES / COLOR BLOCKS
+       ========================================================================== */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+    }
+
+    .section-block {
+      width: 100%;
+      border-bottom: var(--border-rule);
+      padding-top: 40px;
+      padding-bottom: 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .section-block {
+        padding-top: 64px;
+        padding-bottom: 68px;
+      }
+    }
+
+    .block-yellow {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    .block-white {
+      background-color: var(--block-white);
+      color: var(--text-primary);
+    }
+
+    .block-cyan {
+      background-color: var(--block-cyan);
+      color: var(--text-primary);
+    }
+
+    .block-inverted {
+      background-color: var(--block-inverted-bg);
+      color: var(--block-inverted-text);
+    }
+
+    /* ==========================================================================
+       5. HEADER / TOP NAVIGATION BAR
+       ========================================================================== */
+    .site-header {
+      width: 100%;
+      background-color: var(--card-bg);
+      border-bottom: var(--border-rule);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .nav-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--tap-min);
+      padding: 8px 12px;
+      background-color: var(--bg-primary);
+      border: var(--border-solid);
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: var(--tap-min);
+      min-width: var(--tap-min);
+      padding: 8px 12px;
+      background-color: var(--card-bg);
+      border: var(--border-solid);
+      box-shadow: 4px 4px 0px var(--border-color);
+      font-family: var(--font-zh-heavy);
+      font-weight: 900;
+      font-size: 14px;
+      transition: transform 0.1s steps(2, end), box-shadow 0.1s steps(2, end);
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0px var(--border-color);
+      background-color: var(--bg-primary);
+    }
+
+    /* ==========================================================================
+       6. HERO SECTION (MOBILE 48PX / DESKTOP 96PX TILTED 2DEG + PHOTO FRAME)
+       ========================================================================== */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1.25fr 0.85fr;
+        gap: 40px;
+      }
+    }
+
+    .hero-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 14px;
+      background-color: var(--card-bg);
+      border: var(--border-solid);
+      box-shadow: 4px 4px 0px var(--border-color);
+      font-family: var(--font-zh-heavy);
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .hero-badge-accent {
+      background-color: var(--block-cyan);
+    }
+
+    .hero-title-wrap {
+      position: relative;
+      display: inline-block;
+      margin-top: 6px;
+      margin-bottom: 22px;
+      max-width: 100%;
+    }
+
+    /* REQUIRED: 48px mobile, 96px desktop, tilted 2 degrees, Noto Sans TC 900 */
+    .hero-name {
+      display: inline-block;
+      font-family: var(--font-zh-heavy);
+      font-weight: 900;
+      font-size: 48px;
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      background-color: var(--card-bg);
+      border: var(--border-solid);
+      box-shadow: var(--shadow-hard);
+      padding: 12px 20px;
+      transform: rotate(-2deg);
+      transform-origin: center left;
+    }
+
+    @media (min-width: 768px) {
+      .hero-name {
+        font-size: 96px;
+        padding: 16px 28px;
+      }
+    }
+
+    .hero-en-sub {
+      display: block;
+      margin-top: 14px;
+      font-family: var(--font-heading);
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 768px) {
+      .hero-en-sub {
+        font-size: 26px;
+      }
+    }
+
+    .hero-intro-card {
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .hero-intro-card strong {
+      font-family: var(--font-zh-heavy);
+      font-weight: 900;
+      background-color: var(--bg-primary);
+      padding: 0 4px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    /* Photo Card & Upload Frame */
+    .photo-card {
+      padding: 14px;
+      background-color: var(--card-bg);
+      position: relative;
+    }
+
+    .photo-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: var(--border-solid);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+    }
+
+    .photo-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .photo-dot {
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--border-color);
+      background-color: var(--btn-primary);
+    }
+
+    .photo-dot:nth-child(2) {
+      background-color: var(--bg-primary);
+    }
+
+    .photo-dot:nth-child(3) {
+      background-color: var(--block-cyan);
+    }
+
+    .photo-viewport {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border: var(--border-solid);
+      background-color: var(--block-cyan);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-viewport img,
+    .photo-viewport svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-footer {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .photo-caption {
+      font-family: var(--font-zh-heavy);
+      font-weight: 900;
+      font-size: 15px;
+      background-color: var(--bg-primary);
+      border: var(--border-solid);
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .photo-upload-label {
+      width: 100%;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    /* ==========================================================================
+       7. STICKERS (BLACK-OUTLINED STAR & ARROW SVG STICKERS)
+       ========================================================================== */
+    .sticker {
+      pointer-events: none;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .sticker-star-hero {
+      position: absolute;
+      top: -22px;
+      right: -14px;
+      width: 48px;
+      height: 48px;
+      z-index: 5;
+    }
+
+    @media (min-width: 768px) {
+      .sticker-star-hero {
+        top: -28px;
+        right: -28px;
+        width: 68px;
+        height: 68px;
+      }
+    }
+
+    .sticker-inline {
+      display: inline-block;
+      vertical-align: middle;
+      width: 36px;
+      height: 36px;
+    }
+
+    /* ==========================================================================
+       8. SECTION HEADINGS & TICKER BAR
+       ========================================================================== */
+    .ticker-strip {
+      width: 100%;
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
+      border-bottom: var(--border-rule);
+      padding: 12px 16px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+
+    .section-header-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 30px;
+      line-height: 1.15;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .section-title {
+        font-size: 44px;
+      }
+    }
+
+    .section-tag {
+      padding: 6px 12px;
+      border: var(--border-solid);
+      background-color: var(--card-bg);
+      color: var(--text-primary);
+      font-family: var(--font-heading);
+      font-size: 13px;
+      box-shadow: 4px 4px 0px var(--border-color);
+    }
+
+    /* ==========================================================================
+       9. ABOUT & ACADEMIC PROFILE GRID
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .about-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+    }
+
+    .info-card {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .info-card-step {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 4px 10px;
+      background-color: var(--bg-primary);
+      border: var(--border-solid);
+      font-family: var(--font-heading);
+      font-size: 14px;
+    }
+
+    .info-card-step.cyan {
+      background-color: var(--block-cyan);
+    }
+
+    .info-card-step.red {
+      background-color: var(--btn-primary);
+    }
+
+    .info-card h3 {
+      font-family: var(--font-zh-heavy);
+      font-weight: 900;
+      font-size: 22px;
+    }
+
+    .info-card p {
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .skill-pill {
+      padding: 6px 10px;
+      background-color: var(--bg-primary);
+      border: 2px solid var(--border-color);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* ==========================================================================
+       10. INVERTED SECTION (BLACK BACKGROUND #111111 + YELLOW TEXT #FFDE59)
+       ========================================================================== */
+    .block-inverted .section-tag {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      border: 3px solid var(--bg-primary);
+      box-shadow: 4px 4px 0px var(--btn-primary);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .project-card {
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
+      border: 3px solid var(--bg-primary);
+      box-shadow: var(--shadow-inverted-hard);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      transition: transform 0.12s steps(2, end), box-shadow 0.12s steps(2, end);
+    }
+
+    .project-card:hover {
+      transform: translate(4px, 4px);
+      box-shadow: var(--shadow-inverted-pressed);
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--bg-primary);
+      padding-bottom: 10px;
+    }
+
+    .project-num {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      padding: 4px 10px;
+    }
+
+    .project-cat {
+      font-family: var(--font-heading);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .project-card h3 {
+      font-family: var(--font-zh-heavy);
+      font-weight: 900;
+      font-size: 22px;
+      color: var(--card-bg);
+    }
+
+    .project-card p {
+      color: var(--bg-primary);
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .project-stack span {
+      padding: 4px 8px;
+      border: 2px solid var(--bg-primary);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--bg-primary);
+    }
+
+    /* ==========================================================================
+       11. CONTACT SECTION & FORM
+       ========================================================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    @media (min-width: 820px) {
+      .contact-grid {
+        grid-template-columns: 1fr 1.2fr;
+        gap: 36px;
+      }
+    }
+
+    .contact-box {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-box h3 {
+      font-family: var(--font-zh-heavy);
+      font-weight: 900;
+      font-size: 24px;
+    }
+
+    .contact-detail-item {
+      padding: 12px;
+      background-color: var(--bg-primary);
+      border: var(--border-solid);
+      font-weight: 700;
+    }
+
+    .form-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-family: var(--font-zh-heavy);
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .form-feedback {
+      display: none;
+      padding: 14px;
+      background-color: var(--block-lime);
+      border: var(--border-solid);
+      box-shadow: var(--shadow-hard);
+      font-family: var(--font-zh-heavy);
+      font-weight: 900;
+    }
+
+    .form-feedback.is-visible {
+      display: block;
+    }
+
+    /* ==========================================================================
+       12. FOOTER
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--card-bg);
+      padding: 24px 16px;
+      text-align: center;
+      font-family: var(--font-zh-heavy);
+      font-weight: 900;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <!-- ========================================================================
+       TOP STICKY NAVIGATION
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="#top" class="brand-tag">RUAN HAI-NAN // 阮海南</a>
+      <nav class="nav-links" aria-label="主要導覽">
+        <a href="#about" class="nav-link">關於我</a>
+        <a href="#projects" class="nav-link">專題作品</a>
+        <a href="#contact" class="nav-link">聯絡我</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       HERO SECTION (YELLOW #FFDE59 BLOCK)
+       ======================================================================== -->
+  <main id="top">
+    <section class="section-block block-yellow" aria-labelledby="hero-heading">
+      <div class="container hero-grid">
+        <!-- Left Column: Identity, Tilted 2deg Giant Name, CTA -->
+        <div>
+          <div class="hero-badge-row">
+            <span class="hero-badge">開南大學 KAINAN UNIVERSITY</span>
+            <span class="hero-badge hero-badge-accent">資訊管理學系 3年級</span>
+          </div>
+
+          <div class="hero-title-wrap">
+            <!-- Black-outlined 8-point Starburst Sticker -->
+            <svg class="sticker sticker-star-hero" viewBox="0 0 80 80" aria-hidden="true">
+              <polygon
+                points="40,3 49,23 71,15 61,35 78,48 56,54 60,76 40,63 20,76 24,54 2,48 19,35 9,15 31,23"
+                fill="#FF5757"
+                stroke="#111111"
+                stroke-width="3.5"
+                stroke-linejoin="miter"
+              />
+            </svg>
+
+            <h1 id="hero-heading" class="hero-name">阮海南</h1>
+          </div>
+
+          <span class="hero-en-sub">RUAN HAI-NAN — IM JUNIOR STUDENT</span>
+
+          <div class="nb-card nb-card-interactive hero-intro-card">
+            <p>
+              你好！我是<strong>阮海南</strong>，目前就讀於<strong>開南大學資訊管理學系3年級</strong>。專注於系統分析與設計、資料庫管理與全端網頁開發，喜歡用直覺、俐落的數位工具解決真實問題。
+            </p>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#contact" class="nb-btn">
+              <span>聯絡我 CONTACT</span>
+              <!-- Chunky Black-Outlined Arrow Sticker -->
+              <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M4 11H16L11 6L13.5 3.5L22 12L13.5 20.5L11 18L16 13H4V11Z"
+                  fill="#111111"
+                />
+              </svg>
+        <!-- Right Column: Framed Portrait Photo Card + Local img/photo.jpg & Upload Option -->
+        <div>
+          <figure class="nb-card nb-card-interactive photo-card">
+            <div class="photo-header-bar">
+              <span>IMG/PHOTO.JPG</span>
+              <div class="photo-dots" aria-hidden="true">
+                <span class="photo-dot"></span>
+                <span class="photo-dot"></span>
+                <span class="photo-dot"></span>
+              </div>
+            </div>
+
+            <div class="photo-viewport" id="photoViewport">
+              <!-- Local Portrait Image loaded directly from img/photo.jpg -->
+              <img
+                id="uploadedPhoto"
+                src="images/myphoto.jpg"
+                alt="阮海南個人照片"
+                onerror="this.style.display='none'; document.getElementById('defaultAvatar').style.display='block';"
+              />
+
+              <!-- Fallback Neo-Brutalist Illustrated Portrait (shown if img/photo.jpg is missing) -->
+              <svg id="defaultAvatar" viewBox="0 0 400 400" role="img" aria-label="阮海南個人頭像插畫" style="display: none;">
+                <!-- Solid Background -->
+                <rect width="400" height="400" fill="#5CE1E6" />
+                <!-- Decorative Geometric Grid Lines -->
+                <line x1="0" y1="80" x2="400" y2="80" stroke="#111111" stroke-width="3" />
+                <line x1="0" y1="320" x2="400" y2="320" stroke="#111111" stroke-width="3" />
+                <line x1="80" y1="0" x2="80" y2="400" stroke="#111111" stroke-width="3" />
+                <line x1="320" y1="0" x2="320" y2="400" stroke="#111111" stroke-width="3" />
+
+                <!-- Corner Star Sticker inside Frame -->
+                <polygon
+                  points="54,24 61,43 80,43 65,55 71,74 54,62 37,74 43,55 28,43 47,43"
+                  fill="#FFDE59"
+                  stroke="#111111"
+                  stroke-width="3"
+                />
+
+                <!-- Shoulders / Hoodie -->
+                <path
+                  d="M75 400 L95 285 L155 268 L245 268 L305 285 L325 400 Z"
+                  fill="#FF5757"
+                  stroke="#111111"
+                  stroke-width="4"
+                />
+                <!-- Hoodie Collar & Strings -->
+                <polygon
+                  points="155,268 200,315 245,268"
+                  fill="#FFDE59"
+                  stroke="#111111"
+                  stroke-width="4"
+                />
+                <line x1="178" y1="302" x2="178" y2="352" stroke="#111111" stroke-width="4" />
+                <line x1="222" y1="302" x2="222" y2="352" stroke="#111111" stroke-width="4" />
+
+                <!-- Neck -->
+                <rect
+                  x="176"
+                  y="222"
+                  width="48"
+                  height="52"
+                  fill="#F7C99E"
+                  stroke="#111111"
+                  stroke-width="4"
+                />
+
+                <!-- Ears -->
+                <rect x="122" y="156" width="18" height="36" fill="#F7C99E" stroke="#111111" stroke-width="4" />
+                <rect x="260" y="156" width="18" height="36" fill="#F7C99E" stroke="#111111" stroke-width="4" />
+
+                <!-- Face -->
+                <rect
+                  x="136"
+                  y="102"
+                  width="128"
+                  height="134"
+                  fill="#F7C99E"
+                  stroke="#111111"
+                  stroke-width="4"
+                />
+
+                <!-- Hair (Bold Neo-Brutalist Block Cut) -->
+                <polygon
+                  points="126,136 132,76 178,62 248,68 274,104 270,142 252,118 214,114 176,122 146,114"
+                  fill="#111111"
+                  stroke="#111111"
+                  stroke-width="4"
+                />
+
+                <!-- Thick Square Glasses -->
+                <rect x="148" y="148" width="44" height="32" fill="#FFFFFF" stroke="#111111" stroke-width="4" />
+                <rect x="208" y="148" width="44" height="32" fill="#FFFFFF" stroke="#111111" stroke-width="4" />
+                <line x1="192" y1="162" x2="208" y2="162" stroke="#111111" stroke-width="4" />
+
+                <!-- Eyes -->
+                <rect x="166" y="158" width="10" height="12" fill="#111111" />
+                <rect x="226" y="158" width="10" height="12" fill="#111111" />
+
+                <!-- Eyebrows -->
+                <line x1="150" y1="138" x2="188" y2="136" stroke="#111111" stroke-width="4" />
+                <line x1="212" y1="136" x2="250" y2="138" stroke="#111111" stroke-width="4" />
+
+                <!-- Nose & Confident Smile -->
+                <polyline points="200,168 195,188 205,188" fill="none" stroke="#111111" stroke-width="4" />
+                <path d="M178 206 L222 206 L214 218 L186 218 Z" fill="#FFFFFF" stroke="#111111" stroke-width="3.5" />
+
+                <!-- Department Badge on Hoodie -->
+                <rect x="234" y="330" width="66" height="30" fill="#FFFFFF" stroke="#111111" stroke-width="3" />
+                <text
+                  x="267"
+                  y="350"
+                  text-anchor="middle"
+                  font-family="Archivo Black, sans-serif"
+                  font-size="14"
+                  fill="#111111"
+                >
+                  KNU IM
+                </text>
+              </svg>
+
+              <!-- Uploaded User Photo Preview (Hidden until user selects a file) -->
+              <img id="uploadedPhoto" src="" alt="阮海南個人照片" style="display: none;" />
+            </div>
+
+            <figcaption class="photo-footer">
+              <div class="photo-caption">阮海南 // 開南大學資訊管理學系 3年級</div>
+              <label for="photoInput" class="nb-btn nb-btn-yellow photo-upload-label">
+                <span>更換我的照片 / UPLOAD PHOTO</span>
+              </label>
+              <input
+                type="file"
+                id="photoInput"
+                class="sr-only"
+                accept="image/*"
+                aria-label="上傳個人照片"
+              />
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         THICK BLACK DIVIDER BANNER
+         ======================================================================== -->
+    <div class="ticker-strip" role="region" aria-label="個人標語">
+      ★ KAINAN UNIVERSITY ★ 資訊管理學系三年級 ★ SYSTEM ANALYSIS ★ WEB DEV ★ DATABASE ★
+    </div>
+
+    <!-- ========================================================================
+         ABOUT & ACADEMIC FOCUS SECTION (WHITE #FFFFFF COLOR BLOCK)
+         ======================================================================== -->
+    <section id="about" class="section-block block-white" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="section-header-row">
+          <h2 id="about-heading" class="section-title">
+            <!-- Black-outlined Arrow Sticker -->
+            <svg class="sticker sticker-inline" viewBox="0 0 40 40" aria-hidden="true">
+              <polygon
+                points="4,14 22,14 22,6 37,20 22,34 22,26 4,26"
+                fill="#FFDE59"
+                stroke="#111111"
+                stroke-width="3"
+              />
+            </svg>
+            <span>ABOUT // 學歷與專長</span>
+          </h2>
+          <span class="section-tag">JUNIOR YEAR // 大三專題階段</span>
+        </div>
+
+        <div class="about-grid">
+          <!-- Card 1 -->
+          <article class="nb-card nb-card-interactive info-card">
+            <span class="info-card-step">01 // ACADEMIC</span>
+            <h3>開南大學 資訊管理學系 3年級</h3>
+            <p>
+              目前就讀開南大學資管系三年級，結合理論與實務訓練，培養企業數位轉型、流程規劃與資訊系統建置能力。
+            </p>
+            <div class="skill-tags">
+              <span class="skill-pill">系統分析與設計</span>
+              <span class="skill-pill">企業資源規劃 ERP</span>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="nb-card nb-card-interactive info-card">
+            <span class="info-card-step cyan">02 // DEVELOPMENT</span>
+            <h3>前後端網頁與資料庫應用</h3>
+            <p>
+              熟悉響應式網頁切版、關聯式資料庫設計與 RESTful API 串接，注重高對比介面可用性與穩定的資料流架構。
+            </p>
+            <div class="skill-tags">
+              <span class="skill-pill">HTML / CSS / JS</span>
+              <span class="skill-pill">SQL / Python</span>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="nb-card nb-card-interactive info-card">
+            <span class="info-card-step red">03 // TEAMWORK</span>
+            <h3>敏捷協作與實務專題執行</h3>
+            <p>
+              積極參與系上專題開發與黑客松競賽，擅長需求訪談、原型設計（Wireframe）與跨組溝通整合。
+            </p>
+            <div class="skill-tags">
+              <span class="skill-pill">Git 版本控制</span>
+              <span class="skill-pill">UI/UX 原型設計</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         INVERTED SECTION (BLACK #111111 BACKGROUND + YELLOW #FFDE59 TEXT)
+         ======================================================================== -->
+    <section id="projects" class="section-block block-inverted" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="section-header-row">
+          <h2 id="projects-heading" class="section-title">
+            <!-- Yellow Star Sticker with Thick Outline -->
+            <svg class="sticker sticker-inline" viewBox="0 0 40 40" aria-hidden="true">
+              <polygon
+                points="20,2 25,14 38,14 28,22 32,35 20,27 8,35 12,22 2,14 15,14"
+                fill="#FF5757"
+                stroke="#FFDE59"
+                stroke-width="2.5"
+              />
+            </svg>
+            <span>PROJECTS // 資管實務作品</span>
+          </h2>
+          <span class="section-tag">SELECTED WORKS 2024–2026</span>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <article class="project-card">
+            <div>
+              <div class="project-top">
+                <span class="project-num">PRJ_01</span>
+                <span class="project-cat">SYSTEM DESIGN</span>
+              </div>
+              <h3 style="margin-top: 14px; margin-bottom: 10px;">校園智慧預訂與排隊系統</h3>
+              <p>
+                針對開南大學周邊餐飲尖峰時段設計的線上點餐系統，整合即時訂單看板與取餐叫號通知，縮短排隊等待時間。
+              </p>
+            </div>
+            <div class="project-stack">
+              <span>HTML5</span>
+              <span>JavaScript</span>
+              <span>MySQL</span>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card">
+            <div>
+              <div class="project-top">
+                <span class="project-num">PRJ_02</span>
+                <span class="project-cat">DATABASE & ERP</span>
+              </div>
+              <h3 style="margin-top: 14px; margin-bottom: 10px;">中小企業進銷存數據儀表板</h3>
+              <p>
+                運用資料庫正規化與視覺化報表模組，協助庫存盤點、安全存量警示與月度銷售趨勢快速查詢。
+              </p>
+            </div>
+            <div class="project-stack">
+              <span>Python</span>
+              <span>SQL</span>
+              <span>Data Viz</span>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card">
+            <div>
+              <div class="project-top">
+                <span class="project-num">PRJ_03</span>
+                <span class="project-cat">WEB UTILITY</span>
+              </div>
+              <h3 style="margin-top: 14px; margin-bottom: 10px;">資管系選課與學分檢核助手</h3>
+              <p>
+                協助同學快速檢視必修、選修與通識學分進度，自動偵測衝堂時段並匯出個人週課表。
+              </p>
+            </div>
+            <div class="project-stack">
+              <span>UI/UX</span>
+              <span>DOM API</span>
+              <span>LocalStorage</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         CONTACT SECTION (CYAN #5CE1E6 COLOR BLOCK)
+         ======================================================================== -->
+    <section id="contact" class="section-block block-cyan" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-header-row">
+          <h2 id="contact-heading" class="section-title">
+            <!-- Black-outlined Diagonal Arrow Sticker -->
+            <svg class="sticker sticker-inline" viewBox="0 0 40 40" aria-hidden="true">
+              <polygon
+                points="8,8 32,8 32,32 25,32 25,20 11,34 6,29 20,15 8,15"
+                fill="#FF5757"
+                stroke="#111111"
+                stroke-width="3"
+              />
+            </svg>
+            <span>CONTACT // 聯絡阮海南</span>
+          </h2>
+          <span class="section-tag">OPEN FOR INTERNSHIP & COLLAB</span>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Info Card -->
+          <div class="nb-card contact-box">
+            <h3>歡迎交流專題合作與實習機會！</h3>
+            <p>
+              無論是系統開發專案討論、競賽組隊，或是資訊管理相關實習機會，都歡迎直接留言給我。
+            </p>
+            <div class="contact-detail-item">
+              所屬系級：開南大學 資訊管理學系 3年級
+            </div>
+            <div class="contact-detail-item">
+              姓名：阮海南 (Ruan Hai-Nan)
+            </div>
+            <div class="contact-detail-item">
+              地點：台灣 桃園市蘆竹區（開南大學）
+            </div>
+          </div>
+
+          <!-- Interactive Neo-Brutalist Form -->
+          <form class="nb-card contact-box form-stack" id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="senderName">你的名字 / NAME *</label>
+              <input
+                type="text"
+                id="senderName"
+                name="senderName"
+                class="nb-input"
+                placeholder="例如：王小明 / 企業人資"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="senderEmail">電子信箱 / EMAIL *</label>
+              <input
+                type="email"
+                id="senderEmail"
+                name="senderEmail"
+                class="nb-input"
+                placeholder="name@example.com"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="senderMessage">訊息內容 / MESSAGE *</label>
+              <textarea
+                id="senderMessage"
+                name="senderMessage"
+                class="nb-input"
+                placeholder="你好阮海南，想和你聊聊..."
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="nb-btn">
+              <span>送出訊息 SEND MESSAGE</span>
+            </button>
+
+            <div id="formFeedback" class="form-feedback" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      © 2026 阮海南 RUAN HAI-NAN — 開南大學資訊管理學系 3年級 // NEO-BRUTALISM EDITION
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       VANILLA JAVASCRIPT: PHOTO UPLOAD PREVIEW & FORM FEEDBACK
+       ======================================================================== -->
+  <script>
+    (function () {
+      // 1. Handle user photo upload to override img/photo.jpg preview
+      const photoInput = document.getElementById('photoInput');
+      const uploadedPhoto = document.getElementById('uploadedPhoto');
+      const defaultAvatar = document.getElementById('defaultAvatar');
+
+      if (photoInput && uploadedPhoto && defaultAvatar) {
+        photoInput.addEventListener('change', function (event) {
+          const file = event.target.files && event.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            uploadedPhoto.src = e.target.result;
+            uploadedPhoto.style.display = 'block';
+            defaultAvatar.style.display = 'none';
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // 2. Handle contact form submission with Neo-Brutalist status box (no alert())
+      const contactForm = document.getElementById('contactForm');
+      const formFeedback = document.getElementById('formFeedback');
+
+      if (contactForm && formFeedback) {
+        contactForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+          const name = document.getElementById('senderName').value.trim();
+          const email = document.getElementById('senderEmail').value.trim();
+          const message = document.getElementById('senderMessage').value.trim();
+
+          if (!name || !email || !message) {
+            formFeedback.style.backgroundColor = '#FF5757';
+            formFeedback.textContent = '請完整填寫姓名、電子信箱與訊息內容！';
+            formFeedback.classList.add('is-visible');
+            return;
+          }
+
+          formFeedback.style.backgroundColor = '#7ED957';
+          formFeedback.textContent =
+            '感謝 ' + name + '！訊息已成功傳送給阮海南（開南大學資管系3年級）。';
+          formFeedback.classList.add('is-visible');
+          contactForm.reset();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
